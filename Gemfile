@@ -27,7 +27,6 @@ gem 'acts_as_list', '0.1.5'
 
 
 gem 'mysql2', '0.3.11'
-
 gem 'capistrano', '2.12.0'
 gem "net-ssh", "2.4.0"
 gem 'unicorn', '4.3.1'
