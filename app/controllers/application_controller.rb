@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  # before_filter :authorize
+  before_filter :authorize
 
   private
 
   def authorize
-    unless Rails.env.test?
+    if APP_CONFIG['perform_authentication']
       authenticate_or_request_with_http_basic do |username, password|
-        username == ENV['HTTP_USER'] && password == ENV['HTTP_PASS']
+        username == APP_CONFIG['username'] && password == APP_CONFIG['password']
       end
     end
   end
