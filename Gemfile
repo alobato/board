@@ -14,12 +14,13 @@ end
 
 group :development do
   gem 'sqlite3', '1.3.5'
-  gem 'heroku', '2.23.0' 
 end
 
-group :production do
-  gem 'pg', '0.13.2'
-end
+# HEROKU
+# gem 'heroku', '2.23.0' 
+# group :production do
+#   gem 'pg', '0.13.2'
+# end
 
 gem 'acts_as_list', '0.1.5'
 
