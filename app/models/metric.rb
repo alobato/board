@@ -8,19 +8,23 @@ class Metric < ActiveRecord::Base
   acts_as_list :scope => :dashboard
 
   def color
-    self.color || '#CCCCCC'
+    return super if super
+    '#CCCCCC'
   end
 
   def width
-    self.width || 1
+    return super if super
+    1
   end
 
   def font_size
-    self.font_size || 50
+    return super if super
+    50
   end
 
   def refresh_every
-    self.refresh_every || 0
+    return super if super
+    0
   end
 
 end

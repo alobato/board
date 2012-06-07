@@ -82,7 +82,7 @@ class MetricsController < ApplicationController
 
     respond_to do |format|
       if @metric.update_attributes(params[:metric])
-        format.html { redirect_to edit_metric_path(@metric), notice: 'Metric was successfully updated.' }
+        format.html { redirect_to metrics_path, notice: 'Metric was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
