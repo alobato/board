@@ -30,9 +30,9 @@ namespace :deploy do
     sudo "service nginx restart"
   end
 
-  desc "Create mysql db"
+  desc "Create mysql db - cap deploy:create_mysql_db -s pass=secret"
   task :create_mysql_db, roles: :db do
-    run "mysqladmin -u root -p #{pass} create #{application}_production"
+    run "mysqladmin -u root -p#{pass} create #{application}_production"
   end
 
   desc "Remove nginx default site"
