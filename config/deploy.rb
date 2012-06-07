@@ -80,8 +80,6 @@ namespace :deploy do
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/config/production.sphinx.conf #{release_path}/config/production.sphinx.conf"
-    run "ln -nfs #{shared_path}/sphinx #{release_path}/db/sphinx"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
