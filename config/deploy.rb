@@ -24,16 +24,15 @@ set :default_environment, {
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :deploy do
+
   desc "Restart Nginx server"
   task :restart_nginx, roles: :app do
     sudo "service nginx restart"
   end
 
-  desc "Create db"
-  task :create_db, roles: :app do
-    puts "------------------CREATE DB---------------------"
-    rails_env = fetch(:rails_env, "production")
-    run "cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} db:create"
+  desc "Create mysql db"
+  task :create_mysql_db, roles: :db do
+    run "mysqladmin -u root -p #{pass} create #{application}_production"
   end
 
   desc "Remove nginx default site"
@@ -55,7 +54,6 @@ namespace :deploy do
   desc "Cold deploy"
   task :cold do # Overriding the default deploy:cold (http://stackoverflow.com/questions/1329778/dbschemaload-vs-dbmigrate-with-capistrano)
     update
-    create_db
     load_schema
     # migrate
     start
