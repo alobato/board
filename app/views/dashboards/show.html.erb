@@ -1,0 +1,48 @@
+<h1>/Dashboard</h1>
+
+<p>
+  <b>Name</b><br>
+  <%= @dashboard.name %>
+</p>
+
+<p>
+  <b>Description</b><br>
+  <%= @dashboard.description %>
+</p>
+
+<p>
+  <b>Metrics</b><br>
+</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="width:20px">&nbsp;</th>
+      <th>ID</th>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody id="metrics" data-update-url="<%= sort_metrics_url(dashboard_id: @dashboard.id) %>">
+    <% @dashboard.metrics.each do |metric| %>
+      <tr id="metric_<%= metric.id %>">
+        <td>
+          <div class="handle">
+            <i class="icon-move" style="font-size:25px;"></i>
+          </div>
+        </td>
+        <td><%= metric.id %></td>
+        <td><%= metric.position %></td>
+        <td><%= metric.name %></td>
+        <td><%= metric.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="form-actions">
+  <%= link_to 'Back', dashboards_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_dashboard_path(@dashboard), :class => 'btn' %>
+  <%= link_to 'Delete', dashboard_path(@dashboard), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

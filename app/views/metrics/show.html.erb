@@ -1,0 +1,9 @@
+<h1>Metric</h1>
+
+<%= graph(@metric) %>
+
+<div class="form-actions">
+  <%= link_to 'Back', metrics_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_metric_path(@metric), :class => 'btn' %>
+  <%= link_to 'Delete', metric_path(@metric), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

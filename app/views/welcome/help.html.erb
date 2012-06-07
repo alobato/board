@@ -1,0 +1,26 @@
+<h1>Help</h1>
+
+<pre>
+# m h  dom mon dow   command
+*/5 * * * * /bin/bash -l -c 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"; eval "$(rbenv init -)"; cd /home/deployer; ruby memory.rb >> /home/deployer/cron.log 2>&1'
+*/5 * * * * /bin/bash -l -c 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"; eval "$(rbenv init -)"; cd /home/deployer; ruby cpu.rb >> /home/deployer/cron.log 2>&1'
+59 3 * * * /bin/bash -l -c 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"; eval "$(rbenv init -)"; cd /home/deployer; ruby disk_space.rb >> /home/deployer/cron.log 2>&1'
+</pre>
+
+<pre>
+#!/usr/bin/env ruby
+v = %x(uptime).split(",  ")[2].split[3]
+puts `curl -s -d "metric_id=4&value=#{v}" http://al-board.herokuapp.com/api/stats`
+</pre>
+
+<pre>
+#!/usr/bin/env ruby
+m = %x(free -m).split(/\n/)[1].split[2]
+puts `curl -s -d "metric_id=3&value=#{m}" http://al-board.herokuapp.com/api/stats`
+</pre>
+
+<pre>
+#!/usr/bin/env ruby
+v = %x(df -h).split(/\n/)[1].split[4].gsub("%","")
+puts `curl -s -d "metric_id=5&value=#{v}" http://al-board.herokuapp.com/api/stats`
+</pre>

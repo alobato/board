@@ -1,0 +1,51 @@
+<% if metric.value_type == 'integer' %>
+<div class="item" id="m<%= metric.id %>" data-refresh-every="<%= metric.refresh_every %>">
+  <div class="inner">
+    <div class="name"><%= metric.name %></div>
+    <div class="number" style="font-size:<%= metric.font_size %>px;line-height:<%= metric.font_size %>px;color:<%= metric.color %>"><%= metric.integer_value %></div>
+  </div>
+</div>
+
+<% elsif metric.value_type == 'line' %>
+
+<div class="item" id="m<%= metric.id %>" data-refresh-every="<%= metric.refresh_every %>">
+  <div class="inner">
+    <div class="name"><%= metric.name %></div>
+    <%= graph(metric, chart_width: 550, chart_height: 150, without_x: false, color: metric.color) %>
+  </div>
+</div>
+
+<% elsif metric.value_type == 'knob' %>
+
+<div class="item" id="m<%= metric.id %>" data-refresh-every="<%= metric.refresh_every %>">
+  <div class="inner">
+    <div class="name"><%= metric.name %></div>
+    <div class="number">
+      <input class="knob" data-bgColor="#555555" data-fgColor="<%= metric.color %>" data-thickness=".3" data-readOnly=true value="<%= metric.integer_value %>" data-width="110" style="height:30px;-webkit-box-shadow:none;box-shadow:none;">
+    </div>
+  </div>
+</div>
+
+<% elsif metric.value_type == 'percent' %>
+
+<div class="item" id="m<%= metric.id %>" data-refresh-every="<%= metric.refresh_every %>">
+  <div class="inner">
+    <div class="title">123 PLATFORM</div>
+    <div class="bar">
+      <div class="bar-inner" style="width:60%;" data-item="iOS"></div>
+      <div class="bar-inner" style="width:39%;" data-item="Android"></div>
+    </div>
+    <div class="number">iOS</div>
+  </div>
+</div>
+
+<% else %>
+
+<div class="item" id="m<%= metric.id %>" data-refresh-every="<%= metric.refresh_every %>">
+  <div class="inner">
+    <div class="name"><%= metric.name %></div>
+    <div class="number" style="font-size:<%= metric.font_size %>px;line-height:<%= metric.font_size %>px;color:<%= metric.color %>"><%= metric.string_value %></div>
+  </div>
+</div>
+
+<% end %>

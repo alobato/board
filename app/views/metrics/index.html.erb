@@ -1,0 +1,28 @@
+<h1>Metrics</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Refresh every</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @metrics.each do |metric| %>
+      <tr>
+        <td><%= metric.id %></td>
+        <td><%= metric.name %></td>
+        <td><%= metric.description %></td>
+        <td><%= metric.refresh_every %> seconds</td>
+        <td>
+          <%= link_to 'Edit', edit_metric_path(metric), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', metric_path(metric), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_metric_path, :class => 'btn btn-primary' %>

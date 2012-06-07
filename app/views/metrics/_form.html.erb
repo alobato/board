@@ -1,0 +1,82 @@
+<%= form_for @metric, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> /Metric</legend>
+
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :value_type, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :value_type, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :string_value, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :string_value, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :integer_value, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :integer_value, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :color, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :color, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :width, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :width, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :font_size, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :font_size, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :refresh_every, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :refresh_every, :class => 'text_field' %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description, :class => 'text_area' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= hidden_field_tag "metric[dashboard_ids][]", nil %>
+      <% Dashboard.all.each do |dashboard| %>
+        <%= check_box_tag "metric[dashboard_ids][]", dashboard.id, @metric.dashboard_ids.include?(dashboard.id), id: dom_id(dashboard) %>
+        <%= dashboard.name %><br/>
+      <% end %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', metrics_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

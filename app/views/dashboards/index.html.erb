@@ -1,0 +1,27 @@
+<h1>Dashboards</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dashboards.each do |dashboard| %>
+      <tr>
+        <td><%= dashboard.id %></td>
+        <td><%= link_to dashboard.name, dashboard_path(dashboard) %></td>
+        <td><%= dashboard.created_at %></td>
+        <td>
+          <%= link_to 'Board', board_dashboard_path(dashboard), :class => 'btn btn-mini' %>
+          <%= link_to 'Edit', edit_dashboard_path(dashboard), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', dashboard_path(dashboard), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_dashboard_path, :class => 'btn btn-primary' %>
