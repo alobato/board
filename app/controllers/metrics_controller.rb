@@ -1,4 +1,5 @@
 class MetricsController < ApplicationController
+  before_filter :authorize, except: [:stats]
 
   # curl -s -d "value=Ola1c&metric_id=3" http://localhost:3000/api/stats
   def stats
