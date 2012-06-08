@@ -10,9 +10,8 @@ module ApplicationHelper
       :without_x => false,
       :color => '#86CBDD'
     )
-    
     hc = LazyHighCharts::HighChart.new('graph', { :style => "width:#{options[:chart_width]}px;height:#{options[:chart_height]}px" }) do |f|
-      f.options[:colors] = [options[:color]]
+      f.options[:colors] = ['#86CBDD']
       f.options[:title][:text] = ''
       f.options[:subtitle][:text] = ''
       f.options[:chart][:width] = options[:chart_width]
@@ -38,8 +37,6 @@ module ApplicationHelper
 
       f.series(name: metric.name, data: dt)
       f.options[:xAxis][:categories] = xs
-
-      # f.options[:yAxis][:labels][:style][:fontSize] = '8px'
     end
     high_chart("metric_#{metric.id.to_s}", hc)
   end

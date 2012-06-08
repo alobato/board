@@ -9,7 +9,7 @@ class Metric < ActiveRecord::Base
 
   def color
     return super if super
-    '#CCCCCC'
+    '#86CBDD'
   end
 
   def width
