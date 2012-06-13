@@ -99,16 +99,6 @@
   color: #6BB96E;
   margin-top:20px; }
 
-
-  .col1 { width: 280px; }
-  .col2 { width: 580px; }
-  .col3 { width: 700px; }
-
-  /**** Clearfix ****/
-  .clearfix:before, .clearfix:after { content: ""; display: table; }
-  .clearfix:after { clear: both; }
-  .clearfix { zoom: 1; }
-
     </style>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -117,20 +107,34 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-
   </head>
 
-  <body id="board" style="text-align:center;">
-
-    <div id="container" class="container clearfix" style="width:1200px;margin:0px auto;">
-
+  <body id="board">
+    <div class="container">
+      
+      <div class="row">
+      <% v = 0 %>
       <% @dashboard.metrics.each do |metric| %>
-        <% c = "col1" %>
-        <% c = "col2" if metric.value_type == 'line' || metric.width == 2 %>
-        <div class="box <%= c %>">
+        <%
+        if metric.value_type == 'string'
+          v += 3
+        elsif metric.value_type == 'line'
+          v += 6
+        end
+        %>
+
+        <% if v > 12 %>
+          <% v = 0 %>
+          </div>
+          <div class="row">          
+        <% end %>
+
+        <div class="span<%= metric.width * 3 %>">
           <%= render partial: 'metrics/widget', locals: { metric: metric} %>
         </div>
+
       <% end %>
+      </div>
 
     </div>
 
@@ -138,15 +142,5 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-    <script src="http://masonry.desandro.com/jquery.masonry.min.js" type="text/javascript"></script>
-    <script>
-      $(function(){
-        $('#container').masonry({
-          itemSelector: '.box',
-          columnWidth: 300
-        });
-      });
-    </script>
-
   </body>
 </html>
