@@ -4,16 +4,7 @@ def new
 end
 
 def create
-
-  logger.info "------------------"
-  logger.info params[:password]
-  logger.info ENV["ADMIN_PASSWORD"]
-  logger.info params[:password].class
-  logger.info ENV["ADMIN_PASSWORD"].class
-  logger.info params[:password] == ENV["ADMIN_PASSWORD"]
-  logger.info "------------------"
-
-  if params[:login] == "admin" && params[:password] == ENV["ADMIN_PASSWORD"]
+  if params[:login] == APP_CONFIG['username'] && params[:password] == APP_CONFIG['password']
     session[:user_id] = 1
     redirect_to root_url, notice: "Logged in!"
   else
