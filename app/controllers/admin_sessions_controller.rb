@@ -5,13 +5,13 @@ end
 
 def create
 
-  logger.debug "------------------"
-  logger.debug params[:password]
-  logger.debug ENV["ADMIN_PASSWORD"]
-  logger.debug params[:password].class
-  logger.debug ENV["ADMIN_PASSWORD"].class
-  logger.debug params[:password] == ENV["ADMIN_PASSWORD"]
-  logger.debug "------------------"
+  logger.info "------------------"
+  logger.info params[:password]
+  logger.info ENV["ADMIN_PASSWORD"]
+  logger.info params[:password].class
+  logger.info ENV["ADMIN_PASSWORD"].class
+  logger.info params[:password] == ENV["ADMIN_PASSWORD"]
+  logger.info "------------------"
 
   if params[:login] == "admin" && params[:password] == ENV["ADMIN_PASSWORD"]
     session[:user_id] = 1
