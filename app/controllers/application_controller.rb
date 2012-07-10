@@ -3,12 +3,13 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_user
+    @current_user ||= 1 if session[:user_id]
+  end
+  helper_method :current_user
+
   def authorize
-    if APP_CONFIG['perform_authentication']
-      authenticate_or_request_with_http_basic do |username, password|
-        username == APP_CONFIG['username'] && password == APP_CONFIG['password']
-      end
-    end
+    redirect_to login_url, alert: "Not authorized" if current_user.nil?
   end
 
 end

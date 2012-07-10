@@ -17,3 +17,4 @@ tmp/**/*
 /vendor/ruby
 /config/database.yml
 /config/config.yml
+.powrc

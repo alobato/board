@@ -1,4 +1,7 @@
 Board::Application.routes.draw do
+
+  root to: 'dashboards#index'
+
   resources :metrics do
     collection { post :sort }
     member do
@@ -17,7 +20,10 @@ Board::Application.routes.draw do
 
   post 'api/stats', to: 'metrics#stats', as: :stats
   get 'help', to: 'welcome#help', as: :help
-  
+
+  get 'login', to: 'admin_sessions#new', as: 'login'
+  get 'logout', to: 'admin_sessions#destroy', as: 'logout'
+  resources :admin_sessions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
