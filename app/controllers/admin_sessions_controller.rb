@@ -4,7 +4,16 @@ def new
 end
 
 def create
-  if params[:login] == "admin" && params[:password] == ENV["ADMIN_PASSWORD"].to_s
+  if params[:login] == "admin" && params[:password] == ENV["ADMIN_PASSWORD"]
+
+    puts "------------------"
+    puts params[:password]
+    puts ENV["ADMIN_PASSWORD"]
+    puts params[:password].class
+    puts ENV["ADMIN_PASSWORD"].class
+    puts params[:password] == ENV["ADMIN_PASSWORD"]
+    puts "------------------"
+
     session[:user_id] = 1
     redirect_to root_url, notice: "Logged in!"
   else
